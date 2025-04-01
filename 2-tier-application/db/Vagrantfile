@@ -5,6 +5,10 @@ Vagrant.configure("2") do |config|
   config.vm.network "public_network", dev: "wlp0s20f3"
 
   config.vm.hostname = "ecomdb"
+  
+  # Variables
+  VM_USERNAME = ENV["VM_USERNAME"] || "default"
+  VM_USER_PASSWORD = ENV["VM_USER_PASSWORD"] || "default"
 
   # Example for VirtualBox:
   config.vm.provider "virtualbox" do |vb|
@@ -27,5 +31,10 @@ Vagrant.configure("2") do |config|
     sudo yum install mysql-server -y
     sudo systemctl start mysqld.service 
     sudo systemctl enable mysqld.service
+
+    # config my host user to access it
+    sudo useradd -m #{VM_USERNAME}
+    echo #{VM_USER_PASSWORD} | sudo passwd -s #{VM_USERNAME}
+    sudo usermod -aG wheel #{VM_USERNAME}
   SHELL
 end

@@ -5,6 +5,10 @@ Vagrant.configure("2") do |config|
   config.vm.network "public_network", dev: "wlp0s20f3"
 
   config.vm.hostname = "ecomwebserver"
+  
+  # Variables
+  VM_USERNAME = ENV["VM_USERNAME"] | "default"
+  VM_USER_PASSWORD = ENV["VM_USER_PASSWORD"] | "default"
 
   # Example for VirtualBox:
   config.vm.provider "virtualbox" do |vb|
@@ -27,6 +31,10 @@ Vagrant.configure("2") do |config|
 
     # allow httpd service to connect to databases like mysql
     sudo setsebool -P httpd_can_network_connect_db 1 
-
+   
+    # config your host user on the vm 
+    sudo useradd -m #{VM_USERNAME}
+    echo #{VM_USER_PASSWORD} | sudo passwd -s #{VM_USERNAME}
+    sudo usermod -aG wheel #{VM_USERNAME}
   SHELL
 end
