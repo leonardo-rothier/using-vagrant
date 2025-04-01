@@ -36,5 +36,8 @@ Vagrant.configure("2") do |config|
     sudo useradd -m #{VM_USERNAME}
     echo #{VM_USER_PASSWORD} | sudo passwd -s #{VM_USERNAME}
     sudo usermod -aG wheel #{VM_USERNAME}
+
+    sudo yum install git -y
+    sudo git clone https://github.com/leonardo-rothier/learning-app-ecommerce /var/www/html/
   SHELL
 end
