@@ -29,7 +29,7 @@ cd using-vagrant/2-tier-application
 
 ### 3️⃣ Start the Virtual Machines
 ```bash
-cd db
+cd 2-tier-application/db
 vagrant up
 
 cd ../webserver
