@@ -1,0 +1,31 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/stream10"
+  # config.vm.box_check_update = false
+
+  config.vm.network "public_network", dev: "wlp0s20f3"
+
+  config.vm.hostname = "ecomdb"
+
+  # Example for VirtualBox:
+  config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+      vb.memory = "1024"
+      vb.cpus = 3
+      vb.name = "db-ecom-centos"     
+  end
+ 
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo yum update -y
+    curl https://repo.mysql.com//mysql84-community-release-el9-1.noarch.rpm -O
+    sudo rpm -Uvh mysql84-community-release-el9-1.noarch.rpm 
+    
+    sudo yum update
+
+    sudo yum install mysql-server -y
+    sudo systemctl start mysqld.service 
+    sudo systemctl enable mysqld.service
+  SHELL
+end
