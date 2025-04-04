@@ -1,33 +1,37 @@
-# 2-Tier Application with Vagrant
+# 2-Tier Application with Vagrant using different environments
 
-This project sets up a **2-tier application** using **Vagrant**, provisioning two virtual machines:
+This project sets up some vms using vagrant, and to test the different types of environment we are using a **2-tier application** as example:
 - **Database VM**: Hosts the database service.
 - **Web Server VM**: Runs a PHP-based web application.
 
 ## 📌 Project Structure
 ```
-2-tier-application/
-│-- db/              # Database VM configuration
-│   ├── Vagrantfile  # Vagrant setup for database
-│-- webserver/       # Web server VM configuration
-│   ├── Vagrantfile  # Vagrant setup for web server
-│-- .gitignore       # Ignore Vagrant-specific files
-│-- README.md        # Project documentation
+using-vagrant/
+│-- 2-tier-application/
+│   │-- db/              # Database VM configuration
+│   │   ├── Vagrantfile  # Vagrant setup for database
+│   │-- webserver/       # Web server VM configuration
+│   │   ├── Vagrantfile  # Vagrant setup for web server
+│-- docker/             # Docker environment
+│   ├── Vagrantfile     # Vagrant setup for Docker VM
+│-- .gitignore          # Ignore .vagrant and other unnecessary files
+│-- README.md           # Project documentation
+
 ```
 
 ## 🚀 Getting Started
-### 1️⃣ Install Dependencies
+### 1 Install Dependencies
 Ensure you have the following installed:
 - [VirtualBox](https://www.virtualbox.org/)
 - [Vagrant](https://www.vagrantup.com/)
 
-### 2️⃣ Clone the Repository
+### 2 Clone the Repository
 ```bash
 git clone https://github.com/buluf/using-vagrant.git
 cd using-vagrant/2-tier-application
 ```
 
-### 3️⃣ Start the Virtual Machines
+### 3 Start the Virtual Machines
 ```bash
 cd 2-tier-application/db
 vagrant up
@@ -37,10 +41,18 @@ vagrant up
 ```
 This will provision and configure both the **database** and **web server** VMs.
 
-### 4️⃣ Access the WVMS
+### 4 Set VM User Access
+To set the vm user variables you can use the .profile
+```bash
+echo 'export VM_USERNAME="<username>"' >> ~/.profile
+echo 'export VM_USER_PASSWORD="<password>"' >> ~/.profile
+
+source ~/.profile    # to load the variables into your shell environment
+```
+### 5 Access the WVMS
 Once provisioning is complete, access the vms via:
 ```
-ssh <vm_hostname>
+ssh <username>@<vm_hostname>
 
 ```
 or inside the vagrant dir
