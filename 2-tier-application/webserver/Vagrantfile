@@ -7,8 +7,8 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "ecomwebserver"
   
   # Variables
-  VM_USERNAME = ENV["VM_USERNAME"] | "default"
-  VM_USER_PASSWORD = ENV["VM_USER_PASSWORD"] | "default"
+  VM_USERNAME = ENV["VM_USERNAME"] || "default"
+  VM_USER_PASSWORD = ENV["VM_USER_PASSWORD"] || "default"
 
   # Example for VirtualBox:
   config.vm.provider "virtualbox" do |vb|
