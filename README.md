@@ -67,5 +67,11 @@ vagrant ssh
 - The **web server VM** runs **PHP + Apache** (configured in `webserver/Vagrantfile`).
 - Networking is set up so the web server can communicate with the database.
 
+
+## Extra
+All this is set up on my homelab — is a personal computer running within my local network. It is dedicated to testing and experimenting as part of my studies and learning journey.  
+
+![Demo Screenshot](assets/myhomelab.png)
+
 ---
 💡 **Contributions Welcome!** Feel free to fork, improve, and submit pull requests. 🚀
